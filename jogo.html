@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sport Club Corinthians Paulista</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            margin-top: 50px;
+        }
+            
+        /* Tabuleiro */
+        .tabuleiro {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 15px;
+            justify-content: center;
+            margin: 20px auto;
+        }
+
+        .toupeira {
+            width: 100px;
+            height: 100px;
+            font-size: 24px;
+            background-color: #ddd;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        /* Estado Toupeira aparecendo*/
+        .vermelho {
+            background-color: #ff4d4d;
+        }
+
+        /* Pontuação */
+        #pontuacao {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Mensagem */
+        #mensagem {
+            font-size: 18px;
+            color: black;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Isso aq é um jogo. Jogue imediatamente.</h1>
+    <p id="pontuacao">Pontos: 0</p>
+    <p id="mensagem"></p>
+    
+    <!-- O Tabuleiro com os 9 botões -->
+    <div class="tabuleiro">
+        <button class="toupeira" onclick="clicarBotao(this)"></button>
+        <button class="toupeira" onclick="clicarBotao(this)"></button>
+        <button class="toupeira" onclick="clicarBotao(this)"></button>
+        <button class="toupeira" onclick="clicarBotao(this)"></button>
+        <button class="toupeira" onclick="clicarBotao(this)"></button>
+        <button class="toupeira" onclick="clicarBotao(this)"></button>
+        <button class="toupeira" onclick="clicarBotao(this)"></button>
+        <button class="toupeira" onclick="clicarBotao(this)"></button>
+        <button class="toupeira" onclick="clicarBotao(this)"></button>
+    </div>
+
+    <script>
+        const botoes = document.querySelectorAll('.toupeira');
+        const elementoPontos = document.getElementById('pontuacao');
+        const elementoMensagem = document.getElementById('mensagem');
+
+        let pontos = 0;
+        let botaoAtual = null;
+
+        // Função para sortear uma topeira aleatória
+        function sortearToupeira() {
+            // Remove a cor vermelha do botão (toupeira) anterior, se tiver
+            if (botaoAtual) {
+                botaoAtual.classList.remove('vermelho');
+            }
+
+            // Escolhe um número aleatório de 0 a 8 (Para 9 Toupeiras)
+            let indiceAleatorio = Math.floor(Math.random() * botoes.length);
+
+            // define o novo botão vermelho
+            botaoAtual = botoes[indiceAleatorio];
+            botaoAtual.classList.add('vermelho');
+        }
+
+        // Função que verifica o clique do usuário
+        function clicarBotao(botaoClicado) {
+            // Limpa a mensagem anterior
+            elementoMensagem.textContent = '';
+
+            // Se o botão clicado for o vermelho
+            if (botaoClicado == botaoAtual) {
+                pontos++;
+                elementoPontos.textContent = "Pontos: " + pontos;
+                elementoMensagem.textContent = "+1 Ponto!";
+
+                // Tira o vermelho logo após o clique
+                botaoClicado.classList.remove('vermelho');
+                botaoAtual = null;
+            }
+        }
+
+        // Troca a toupeira a cada 1000 milissegundos (1 seg)
+        setInterval(sortearToupeira, 1000);
+    </script>
+
+</body>
+</html>
