@@ -31,6 +31,10 @@
             transition: background-color 0.2s;
         }
 
+        .toupeira:hover {
+            transform: scale(1.05);
+        }
+
         /* Estado Toupeira aparecendo*/
         .vermelho {
             background-color: #ff4d4d;
@@ -41,6 +45,17 @@
             font-size: 22px;
             font-weight: bold;
             color: #333;
+            display: inline-block;
+        }
+
+        .animacao-pontos {
+            animation: aumentarPontos 0.2s ease-in-out;
+        }
+
+        @keyframes aumentarPontos {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); color: #ffcc00; }
+            100% { transform: scale(1);}
         }
 
         /* Mensagem */
@@ -100,14 +115,25 @@
 
             // Se o botão clicado for o vermelho
             if (botaoClicado == botaoAtual) {
-                pontos++;
-                elementoPontos.textContent = "Pontos: " + pontos;
+                incrementarPontos();
+
                 elementoMensagem.textContent = "+1 Ponto!";
 
                 // Tira o vermelho logo após o clique
                 botaoClicado.classList.remove('vermelho');
                 botaoAtual = null;
             }
+        }
+
+        function incrementarPontos() {
+            pontos++;
+            elementoPontos.textContent = "Pontos: " + pontos;
+
+            elementoPontos.classList.remove('animacao-pontos');
+            void elementoPontos.offsetHeight;
+
+            elementoPontos.classList.add('animacao-pontos');
+
         }
 
         // Troca a toupeira a cada 1000 milissegundos (1 seg)
