@@ -1,144 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Sport Club Corinthians Paulista</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f9;
-            margin-top: 50px;
-        }
-            
-        /* Tabuleiro */
-        .tabuleiro {
-            display: grid;
-            grid-template-columns: repeat(3, 100px);
-            grid-gap: 15px;
-            justify-content: center;
-            margin: 20px auto;
-        }
-
-        .toupeira {
-            width: 100px;
-            height: 100px;
-            font-size: 24px;
-            background-color: #ddd;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .toupeira:hover {
-            transform: scale(1.05);
-        }
-
-        /* Estado Toupeira aparecendo*/
-        .vermelho {
-            background-color: #ff4d4d;
-        }
-
-        /* Pontuação */
-        #pontuacao {
-            font-size: 22px;
-            font-weight: bold;
-            color: #333;
-            display: inline-block;
-        }
-
-        .animacao-pontos {
-            animation: aumentarPontos 0.2s ease-in-out;
-        }
-
-        @keyframes aumentarPontos {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); color: #ffcc00; }
-            100% { transform: scale(1);}
-        }
-
-        /* Mensagem */
-        #mensagem {
-            font-size: 18px;
-            color: black;
-            height: 24px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Jogos - Início</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Isso aq é um jogo. Jogue imediatamente.</h1>
-    <p id="pontuacao">Pontos: 0</p>
-    <p id="mensagem"></p>
-    
-    <!-- O Tabuleiro com os 9 botões -->
-    <div class="tabuleiro">
-        <button class="toupeira" onclick="clicarBotao(this)"></button>
-        <button class="toupeira" onclick="clicarBotao(this)"></button>
-        <button class="toupeira" onclick="clicarBotao(this)"></button>
-        <button class="toupeira" onclick="clicarBotao(this)"></button>
-        <button class="toupeira" onclick="clicarBotao(this)"></button>
-        <button class="toupeira" onclick="clicarBotao(this)"></button>
-        <button class="toupeira" onclick="clicarBotao(this)"></button>
-        <button class="toupeira" onclick="clicarBotao(this)"></button>
-        <button class="toupeira" onclick="clicarBotao(this)"></button>
-    </div>
+    <header>
+        <h1>Bem-vindo à Plataforma de Jogos</h1>
+    </header>
 
-    <script>
-        const botoes = document.querySelectorAll('.toupeira');
-        const elementoPontos = document.getElementById('pontuacao');
-        const elementoMensagem = document.getElementById('mensagem');
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="jogo.html">Jogar</a>
+        <a href="ranking.html">Ranking</a>
+        <a href="sobre.html">Sobre</a>
+    </nav>
 
-        let pontos = 0;
-        let botaoAtual = null;
+    <main>
+        <h2>Versão Preliminar do Sistema</h2>
+        <p>Esta é a interface não-funcional da plataforma de jogos. Utilize o menu acima ou o botão abaixo para navegar por todas as telas estruturais do sistema.</p>
+        <a href="jogo.html" class="btn">Acessar a Tela do Jogo</a>
+    </main>
 
-        // Função para sortear uma topeira aleatória
-        function sortearToupeira() {
-            // Remove a cor vermelha do botão (toupeira) anterior, se tiver
-            if (botaoAtual) {
-                botaoAtual.classList.remove('vermelho');
-            }
-
-            // Escolhe um número aleatório de 0 a 8 (Para 9 Toupeiras)
-            let indiceAleatorio = Math.floor(Math.random() * botoes.length);
-
-            // define o novo botão vermelho
-            botaoAtual = botoes[indiceAleatorio];
-            botaoAtual.classList.add('vermelho');
-        }
-
-        // Função que verifica o clique do usuário
-        function clicarBotao(botaoClicado) {
-            // Limpa a mensagem anterior
-            elementoMensagem.textContent = '';
-
-            // Se o botão clicado for o vermelho
-            if (botaoClicado == botaoAtual) {
-                incrementarPontos();
-
-                elementoMensagem.textContent = "+1 Ponto!";
-
-                // Tira o vermelho logo após o clique
-                botaoClicado.classList.remove('vermelho');
-                botaoAtual = null;
-            }
-        }
-
-        function incrementarPontos() {
-            pontos++;
-            elementoPontos.textContent = "Pontos: " + pontos;
-
-            elementoPontos.classList.remove('animacao-pontos');
-            void elementoPontos.offsetHeight;
-
-            elementoPontos.classList.add('animacao-pontos');
-
-        }
-
-        // Troca a toupeira a cada 1000 milissegundos (1 seg)
-        setInterval(sortearToupeira, 1000);
-    </script>
+    <footer>
+        <p>&copy; 2026 Plataforma de Jogos - Todos os direitos reservados.</p>
+    </footer>
 
 </body>
 </html>
