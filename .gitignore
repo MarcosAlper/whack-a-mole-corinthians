@@ -1,0 +1,54 @@
+# Segredos e Configurações
+.env
+.env.local
+secrets.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# Java
+*.class
+*.log
+*.ctxt
+.mtj.tmp/
+*.jar
+*.war
+.ear
+hs_err_pid*
+.settings/
+.project
+.classpath
+
+# C# / Unity / .NET
+[Bb]in/
+[Oo]bj/
+Library/
+Temp/
+Obj/
+Logs/
+MemoryCaptures/
+AssetStoreTools/
+ProjectSettings/ProjectVersion.txt
+*.csproj
+*.unitypackage
+*.sln
+
+# GameMaker
+configs/
+export/
+*.yyp.bak
+*.yyz
+local_settings.json
+
+# IDEs e Sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
