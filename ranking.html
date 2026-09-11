@@ -3,60 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Jogos - Ranking</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Ranking</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
     <header>
-        <h1>Ranking de Jogadores</h1>
+        <img src="assets/img/trofeu.png" alt="Trofeu pixel art" class="logo-header">
+        <h1>HIGH SCORES</h1>
+        <nav>
+            <ul>
+                <li><a href="jogo.html">Voltar a partida</a></li>
+                <li><a href="perfil.html">Meu Perfil</a></li>
+                <li><a href="index.html">Sair do Jogo</a></li>
+            </ul>
+        </nav>
     </header>
-
-    <nav>
-        <a href="index.html">Início</a>
-        <a href="jogo.html">Jogar</a>
-        <a href="ranking.html">Ranking</a>
-        <a href="sobre.html">Sobre</a>
-    </nav>
-
     <main>
-        <h2>Melhores Pontuações (Tabela Estática)</h2>
-        <p>Esta tabela contém valores fixos para ilustrar a interface de classificação da plataforma nesta etapa preliminar.</p>
-        
+        <h3>
+            <img src="assets/img/trofeu.png" alt="" class="icon-inline"> MELHORES JOGADORES
+        </h3>
         <table>
             <thead>
                 <tr>
-                    <th>Posição</th>
-                    <th>Jogador</th>
-                    <th>Pontuação</th>
+                    <th>Pos.</th>
+                        <th>Jogador</th>
+                        <th>Modo</th>
+                    <th>Nível</th>
+                    <th>Pontos</th>
+                        <th>Data da partida</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1º</td>
-                    <td>Usuário Exemplo A</td>
-                    <td>1500</td>
+                    <td>
+                        <img src="assets/img/medalha de ouro.webp" alt="Primeiro lugar" class="icon-inline"> 1º
+                    </td>
+                    <td>Rodrigo Garro</td>
+                    <td>Explosiva</td>
+                    <td>8</td>
+                    <td>120</td>
+                    <td>09/09/2026</td>
                 </tr>
                 <tr>
                     <td>2º</td>
-                    <td>Usuário Exemplo B</td>
-                    <td>1250</td>
-                </tr>
-                <tr>
-                    <td>3º</td>
-                    <td>Usuário Exemplo C</td>
-                    <td>980</td>
+                    <td>Breno Bidon</td>
+                    <td>Explosiva</td>
+                    <td>3</td>
+                    <td>45</td>
+                    <td>09/09/2026</td>
                 </tr>
             </tbody>
         </table>
-
-        <br>
-        <a href="jogo.html" class="btn">Voltar para o Jogo</a>
     </main>
-
-    <footer>
-        <p>&copy; 2026 Plataforma de Jogos - Todos os direitos reservados.</p>
-    </footer>
-
 </body>
 </html>

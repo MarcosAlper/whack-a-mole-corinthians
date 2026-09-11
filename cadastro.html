@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <img src="assets/img/toupeira1.png" alt="Toupeira pixel art" class="logo-header">
+        <h1>CRIE SUA CONTA</h1>
+    </header>
+    <main>
+        <h2>CADASTRO DE JOGADOR</h2>
+        <p class="eyebrow">Preencha seus dados</p>
+        <form action="jogo.html" method="post">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="nascimento">Data de nascimento</label>
+            <input type="date" id="nascimento" name="nascimento" required>
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required placeholder="Escolha seu nome">
+
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" required>
+
+            <button type="submit"><img src="assets/img/hammer.png" alt="" class="icon-inline"> CRIAR JOGADOR</button>
+        </form>
+        <p class="eyebrow"><a href="index.html">← Voltar ao menu principal</a></p>
+    </main>
+</body>
+</html>

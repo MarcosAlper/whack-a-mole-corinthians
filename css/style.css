@@ -1,0 +1,343 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #67c4cf;
+    color: #f5f5f5;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px 12px 36px;
+}
+
+header {
+    width: 100%;
+    max-width: 980px;
+    margin-bottom: 18px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header h1 {
+    color: #ffffff;
+    text-shadow: 3px 3px 0 #17143b;
+    font-size: clamp(1.35rem, 5vw, 2.1rem);
+    letter-spacing: 2px;
+    margin: 12px 0 18px;
+}
+
+.logo-header {
+    display: inline-block;
+    padding: 10px;
+    width: 74px;
+    height: 74px;
+    border: 3px solid #ffd166;
+    outline: 2px solid #000;
+    background: #111;
+    color: #ef476f;
+    font-size: 2.25rem;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
+main {
+    background-color: #29245c;
+    border: 2px solid #17143b;
+    padding: 20px;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+h2, h3 {
+    color: #ffd166;
+    text-shadow: 1px 1px 0 #000000;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.7rem;
+    background-color: #111;
+    padding: 8px 9px;
+    border: 2px solid #54e0d3;
+    box-shadow: none;
+}
+
+nav a:hover {
+    background-color: #54e0d3;
+    color: #000000;
+    text-shadow: none;
+    box-shadow: none;
+}
+a { color: #ff515a; }
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 0.7rem;
+    color: #ffffff;
+}
+
+input, select, button {
+    font-family: "Courier New", monospace;
+    font-weight: 700;
+    padding: 10px;
+    font-size: 0.85rem;
+    background-color: #17143b;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+input[readonly], input[disabled] {
+    background-color: #333333;
+    color: #888888;
+    border-color: #555555;
+}
+
+button {
+    background-color: #ef476f;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    border: 2px solid #000000;
+}
+
+button:hover {
+    background-color: #ff3944;
+}
+
+.btn-danger {
+    background-color: #111;
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background-color: #ff3333;
+    color: #ffffff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.65rem;
+    background-color: #111111;
+}
+
+th, td {
+    border: 2px solid #ffffff;
+    padding: 10px 6px;
+    text-align: center;
+}
+
+th {
+    background-color: #171a29;
+    color: #ffd166;
+}
+
+.hud {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    background-color: #11131e;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 2px solid #54e0d3;
+    font-size: 0.65rem;
+}
+
+.hud div {
+    padding: 6px;
+    border-left: 3px solid #ef476f;
+    background: #201b4c;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hud strong { color: #ffd166; }
+
+.hud .icon-inline {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+}
+
+.board-mock {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
+    background-color: #39a85c;
+    padding: 11px;
+    border: 3px solid #ffffff;
+    margin-bottom: 20px;
+    background-image: repeating-linear-gradient(0deg, #39a85c 0 22px, #45bb65 22px 44px);
+}
+
+.hole {
+    min-height: 62px;
+    background: rgba(59, 32, 77, .92);
+    border: 2px solid #17143b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    border-radius: 3px;
+    box-shadow: inset 0 -4px 0 rgba(0,0,0,.34);
+    cursor: crosshair;
+    transition: background-color .1s linear;
+}
+
+.hole:hover {
+    background-color: rgba(239, 71, 111, .94);
+    box-shadow: inset 0 -4px 0 rgba(0,0,0,.34);
+}
+
+.sprite-img {
+    display: block;
+    max-width: 100%;
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.icon-inline {
+    width: 1.4em;
+    height: 1.4em;
+    object-fit: contain;
+    vertical-align: middle;
+    image-rendering: pixelated;
+}
+
+button .icon-inline {
+    width: 60px;
+    height: 60px;
+    flex: 0 0 60px;
+}
+
+h3 .icon-inline {
+    width: 60px;
+    height: 30px;
+}
+
+table .icon-inline {
+    width: 40px;
+    height: 40px;
+}
+
+.section-block { border-top: 3px solid #555; padding-top: 20px; margin-top: 24px; }
+.board-mock + .section-block { margin-top: 30px; }
+
+.game-menu {
+    padding-top: 30px;
+}
+
+body:not(.game-menu) {
+    background-color: #67c4cf;
+    background-image: linear-gradient(to bottom, #67c4cf 0 52%, #4aa947 52% 100%);
+}
+
+.game-menu-header {
+    width: 100%;
+    max-width: 760px;
+    margin-bottom: 22px;
+    text-align: center;
+}
+
+.game-menu-header::before { display: none; }
+.game-menu-header h1 {
+    margin: 12px 0 8px;
+    color: #ffd166;
+    font-size: 3rem;
+    line-height: 1;
+    text-shadow: 4px 4px 0 #17143b;
+}
+
+.menu-subtitle {
+    color: #ffffff;
+    font-size: .72rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0 #111;
+}
+
+.login-panel {
+    width: 100%;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    border-color: #ffd166;
+    outline: none;
+    box-shadow: none;
+    background-color: #29245c;
+}
+
+.menu-prompt {
+    margin-bottom: 24px;
+    color: #ffd166;
+    text-align: center;
+    font-size: .72rem;
+    letter-spacing: 1px;
+}
+
+.login-panel h2 { text-align: center; }
+
+.login-panel button {
+    border-color: #ffd166;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.login-panel button .icon-inline {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+}
+
+.register-link {
+    margin-top: 16px;
+    text-align: center;
+    font-size: .65rem;
+}
+
+.menu-footer {
+    margin-top: 28px;
+    color: #8d8d8d;
+    text-align: center;
+    font-size: .55rem;
+    letter-spacing: 1px;
+}

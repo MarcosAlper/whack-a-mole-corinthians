@@ -3,31 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Jogos - Início</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Arcade 8-Bit | Acerte a Toupeira</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-
-    <header>
-        <h1>Bem-vindo à Plataforma de Jogos</h1>
+<body class="game-menu">
+    <header class="game-menu-header">
+        <h1>ACERTE<br>A TOUPEIRA</h1>
+        <p class="menu-subtitle">SI401A -Programação para a Web</p>
     </header>
+    <main class="login-panel">
+        <p class="menu-prompt">&gt;&gt;  PRESS  START  &lt;&lt;</p>
+        <h2>FAÇA LOGIN PARA JOGAR</h2>
+        <form action="jogo.html" method="post">
+            <label for="username">Nome</label>
+            <input type="text" id="username" name="username" required placeholder="Digite seu username">
 
-    <nav>
-        <a href="index.html">Início</a>
-        <a href="jogo.html">Jogar</a>
-        <a href="ranking.html">Ranking</a>
-        <a href="sobre.html">Sobre</a>
-    </nav>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" required placeholder="Digite sua senha">
 
-    <main>
-        <h2>Versão Preliminar do Sistema</h2>
-        <p>Esta é a interface não-funcional da plataforma de jogos. Utilize o menu acima ou o botão abaixo para navegar por todas as telas estruturais do sistema.</p>
-        <a href="jogo.html" class="btn">Acessar a Tela do Jogo</a>
+            <button type="submit"><img src="assets/img/toupeira1.png" alt="" class="icon-inline"> INICIAR PARTIDA</button>
+        </form>
+        <p class="register-link">
+            Não tem uma conta? <a href="cadastro.html">Crie sua conta</a>   
+        </p>
+        <p class="menu-footer">COLOQUE UMA FICHA</p>
     </main>
-
-    <footer>
-        <p>&copy; 2026 Plataforma de Jogos - Todos os direitos reservados.</p>
-    </footer>
-
 </body>
 </html>

@@ -3,38 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Jogos - Área do Jogo</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Jogo</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
     <header>
-        <h1>Área do Jogo (Versão Estática)</h1>
+        <img src="assets/img/controle.webp" alt="Joystick pixel art" class="logo-header">
+        <h1>ACERTE AS TOUPEIRAS!!!</h1>
+        <nav>
+            <ul>
+                <li><a href="ranking.html">High Scores</a></li>
+                <li><a href="perfil.html">Meu Perfil</a></li>
+                <li><a href="index.html">Sair do Jogo</a></li>
+            </ul>
+        </nav>
     </header>
-
-    <nav>
-        <a href="index.html">Início</a>
-        <a href="jogo.html">Jogar</a>
-        <a href="ranking.html">Ranking</a>
-        <a href="sobre.html">Sobre</a>
-    </nav>
-
     <main>
-        <h2>Modo de Jogo: Acertar a Toupeira</h2>
-        <p><em>Nota: Conforme os requisitos da entrega parcial, as funcionalidades dinâmicas do jogo e o controle de acesso estão desativadas. Abaixo encontra-se a representação visual estática do tabuleiro.</em></p>
-        
-        <!-- Substituição do tabuleiro dinâmico por uma figura/imagem estática -->
-        <div class="tabuleiro-estatico">
-            <img src="https://via.placeholder.com/280x280?text=Tabuleiro+do+Jogo+(Estatico)" alt="Representação estática do tabuleiro do jogo">
-        </div>
+        <section>
+            <h3><img src="assets/img/engrenagem.webp" alt="" class="icon-inline"> CONFIGURE SUA PARTIDA</h3>
+            <form action="#" method="post" style="margin-bottom: 20px;">
+                <label for="dimensoes">Tamanho da arena (4 a 64 buracos)</label>
+                <input type="number" id="dimensoes" min="4" max="64" value="16">
 
-        <p>Pontuação Atual: <strong>0 (Valor Fixo)</strong></p>
-        <a href="ranking.html" class="btn">Ver Ranking</a>
+                <label for="modo">Modo de jogo</label>
+                <select id="modo">
+                    <option value="classica">Classico</option>
+                    <option value="explosiva">Explosivo</option>
+                </select>
+
+                <button type="button"><img src="assets/img/hammer.png" alt="" class="icon-inline"> START GAME</button>
+                <button type="button" class="btn-danger">ENCERRAR PARTIDA</button>
+            </form>
+        </section>
+
+        <section class="hud">
+            <div>
+                <img src="assets/img/relogio.png" alt="" class="icon-inline"> TEMPO RESTANTE: <strong>18s</strong>
+            </div>
+            <div>
+                <img src="assets/img/bomba.webp" alt="" class="icon-inline"> MODO: <strong>EXPLOSIVO</strong>
+            </div>
+            <div>
+                <img src="assets/img/toupeira3.webp" alt="" class="icon-inline"> TOUPEIRAS: <strong>12</strong>
+            </div>
+            <div>
+                <img src="assets/img/percent.png" alt="" class="icon-inline"> PRECISÃO: <strong>80% / 90%</strong>
+            </div>
+        </section>
+
+        <section class="board-mock">
+            <div class="hole">
+                <img src="assets/img/hole.webp" alt="Buraco vazio" class="sprite-img">
+            </div>
+
+            <div class="hole">
+                <img src="assets/img/toupeira1.png" alt="Toupeira" class="sprite-img">
+            </div> 
+            <div class="hole">
+                <img src="assets/img/toupeira1.png" alt="Toupeira" class="sprite-img">
+            </div>
+
+            <div class="hole">
+                <img src="assets/img/bomba.webp" alt="Bomba" class="sprite-img">
+            </div>
+
+            <div class="hole"><img src="assets/img/hole.webp" alt="Buraco vazio" class="sprite-img"></div>
+            <div class="hole"><img src="assets/img/hole.webp" alt="Buraco vazio" class="sprite-img"></div>
+            <div class="hole"><img src="assets/img/hole.webp" alt="Buraco vazio" class="sprite-img"></div>
+            <div class="hole"><img src="assets/img/hole.webp" alt="Buraco vazio" class="sprite-img"></div>
+            <div class="hole"><img src="assets/img/hole.webp" alt="Buraco vazio" class="sprite-img"></div>
+            <div class="hole"><img src="assets/img/toupeira1.png" alt="Toupeira" class="sprite-img"></div>
+            <div class="hole"><img src="assets/img/hole.webp" alt="Buraco vazio" class="sprite-img"></div>
+            <div class="hole"><img src="assets/img/bomba.webp" alt="Bomba" class="sprite-img"></div>
+            <div class="hole"><img src="assets/img/hole.webp" alt="Buraco vazio" class="sprite-img"></div>
+            <div class="hole"><img src="assets/img/hole.webp" alt="Buraco vazio" class="sprite-img"></div>
+            <div class="hole"><img src="assets/img/hole.webp" alt="Buraco vazio" class="sprite-img"></div>
+            <div class="hole"><img src="assets/img/hole.webp" alt="Buraco vazio" class="sprite-img"></div>
+        </section>
+
+        <section>
+            <h3>
+                    <img src="assets/img/prancheta.webp" alt="" class="icon-inline"> HISTÓRICO DE PARTIDAS
+            </h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jogador</th>
+                        <th>Arena</th>
+                        <th>Modo</th>
+                        <th>Pontos</th>
+                        <th>Nível</th>
+                        <th>Data/Hora</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Memphis Depay</td>
+                        <td>16 buracos</td>
+                        <td>Explosiva</td>
+                        <td>45</td>
+                        <td>3</td>
+                        <td>10/09/2026 10:10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
     </main>
-
-    <footer>
-        <p>&copy; 2026 Plataforma de Jogos - Todos os direitos reservados.</p>
-    </footer>
-
 </body>
 </html>
