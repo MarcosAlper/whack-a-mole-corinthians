@@ -1,0 +1,110 @@
+body {
+    background-color: #67c4cf;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+}
+
+header {
+    background-color: #29245c;
+    padding: 20px;
+}
+
+.logo-header {
+    width: 70px;
+}
+
+h1 {
+    color: yellow;
+}
+
+nav a {
+    color: white;
+    margin: 10px;
+}
+
+main {
+    background-color: #29245c;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+h3 {
+    color: yellow;
+}
+
+.icon-inline {
+    width: 25px;
+    height: 25px;
+}
+
+form {
+    margin: 20px;
+}
+
+input,
+select,
+button {
+    padding: 8px;
+    margin: 5px;
+}
+
+button {
+    background-color: #ef476f;
+    color: white;
+}
+
+.btn-danger {
+    background-color: black;
+}
+
+.hud {
+    background-color: #111;
+    padding: 10px;
+    margin: 20px;
+}
+
+.hud div {
+    margin: 10px;
+}
+
+.hud strong {
+    color: yellow;
+}
+
+.board-mock {
+    background-color: green;
+    padding: 10px;
+}
+
+.hole {
+    display: inline-block;
+    width: 20%;
+    height: 70px;
+    margin: 5px;
+    background-color: #3b204d;
+    text-align: center;
+}
+
+.sprite-img {
+    width: 40px;
+    height: 40px;
+    margin-top: 15px;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    background-color: black;
+}
+
+th,
+td {
+    border: 1px solid white;
+    padding: 10px;
+}
+
+th {
+    color: yellow;
+}
