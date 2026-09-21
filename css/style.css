@@ -37,6 +37,14 @@ h3 {
 .icon-inline {
     width: 25px;
     height: 25px;
+    object-fit: contain;
+    vertical-align: middle;
+    image-rendering: pixelated;
+}
+
+table .icon-inline{
+    width: 32px;
+    height: 32px;
 }
 
 form {
@@ -97,6 +105,7 @@ table {
     width: 100%;
     margin-top: 20px;
     background-color: black;
+    margin-bottom: 30px;
 }
 
 th,
@@ -107,4 +116,35 @@ td {
 
 th {
     color: yellow;
+}
+
+.header-modo {
+    background-color: #171a29;
+    color: #ffd166;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    padding: 15px;
+}
+
+.header-modo .icone-modo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    vertical-align: middle;
+    image-rendering: pixelated;
+    margin-right: 15px;
+    border: 2px solid #ffd166;
+    background-color: #000000;
+}
+
+.linha-primeiro {
+    background-color: #ffc30073;
+}
+
+.linha-segundo {
+    background-color: #e5e5e573;
+}
+
+.linha-terceiro {
+    background-color: #c97c5d73;
 }
