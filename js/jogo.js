@@ -71,32 +71,31 @@ if (board) {
         state.activeType = null;
     }
 
+    function updateHud() {
+        const accuracy = state.molesShown ? Math.floor((state.levelHits / state.molesShown) * 100) : 0;
+        timeOutput.textContent = `${state.timeLeft}s`;
+        totalHitsOutput.textContent = state.totalHits;
+        accuracyOutput.textContent = `${accuracy}% / ${REQUIRED_ACCURACY}%`;
+        levelOutput.textContent = state.level;
+        scoreOutput.textContent = state.score;
+    }
 
-    config.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const rows = Number(rowsInput.value);
-        const columns = Number(columnsInput.value);
-        const holes = rows * columns;
-        if (!Number.isInteger(rows) || !Number.isInteger(columns) || holes < 4 || holes > 64) {
-            setMessage(message, "Escolha dimensões cujo produto fique entre 4 e 64 buracos.", true);
-            return;
+    function hitHole(hole) {
+        if (!state.running || hole !== state.activeHole) return;
+        if (state.activeType === "mole") {
+            state.totalHits += 1;
+            state.levelHits += 1;
+            state.score += 1;
+            setMessage(message, "Toupeira acertada! +1 ponto.");
+        } else {
+            state.score -= 1;
+            setMessage(message, "Bomba! -1 ponto.", true);
         }
-        if (state.running) return;
-
-        state.rows = rows;
-        state.columns = columns;
-        state.mode = modeInput.value;
-        state.level = 1;
-        state.totalHits = 0;
-        state.score = 0;
-        state.running = true;
-        modeOutput.textContent = state.mode === "classica" ? "Clássico" : "Explosivo";
-        renderBoard();
+        clearTimeout(state.spawnTimer);
+        clearTarget();
         updateHud();
-        startButton.disabled = true;
-        quitButton.disabled = false;
-        startLevel();
-    })
+        scheduleTarget(250);
+    }
 
     function showTarget() {
         if (!state.running) return;
@@ -124,4 +123,30 @@ if (board) {
         if (!state.running) return;
         state.spawnTimer = window.setTimeout(showTarget, delay);
     }
+
+    config.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const rows = Number(rowsInput.value);
+        const columns = Number(columnsInput.value);
+        const holes = rows * columns;
+        if (!Number.isInteger(rows) || !Number.isInteger(columns) || holes < 4 || holes > 64) {
+            setMessage(message, "Escolha dimensões cujo produto fique entre 4 e 64 buracos.", true);
+            return;
+        }
+        if (state.running) return;
+
+        state.rows = rows;
+        state.columns = columns;
+        state.mode = modeInput.value;
+        state.level = 1;
+        state.totalHits = 0;
+        state.score = 0;
+        state.running = true;
+        modeOutput.textContent = state.mode === "classica" ? "Clássico" : "Explosivo";
+        renderBoard();
+        updateHud();
+        startButton.disabled = true;
+        quitButton.disabled = false;
+        startLevel();
+    });
 }
