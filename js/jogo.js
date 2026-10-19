@@ -60,6 +60,18 @@ if (board) {
         }
     }
 
+    function clearTarget() {
+        if (!state.activeHole) return;
+        state.activeHole.classList.remove("hole-target", "hole-bomb");
+        state.activeHole.setAttribute("aria-label", `Buraco ${Array.from(board.children).indexOf(state.activeHole) + 1}, vazio`);
+        const image = state.activeHole.querySelector("img");
+        image.src = "assets/img/hole.webp";
+        image.alt = "";
+        state.activeHole = null;
+        state.activeType = null;
+    }
+
+
     config.addEventListener("submit", (event) => {
         event.preventDefault();
         const rows = Number(rowsInput.value);
@@ -85,4 +97,31 @@ if (board) {
         quitButton.disabled = false;
         startLevel();
     })
+
+    function showTarget() {
+        if (!state.running) return;
+        const holes = Array.from(board.children);
+        const hole = holes[Math.floor(Math.random() * holes.length)];
+        const isBomb = state.mode === "explosiva" && Math.random() < 0.25;
+        state.activeHole = hole;
+        state.activeType = isBomb ? "bomb" : "mole";
+        if (!isBomb) state.molesShown += 1;
+        hole.classList.add(isBomb ? "hole-bomb" : "hole-target");
+        hole.setAttribute("aria-label", isBomb ? "Bomba, clique para penalidade" : "Toupeira, clique para acertar");
+        const image = hole.querySelector("img");
+        image.src = isBomb ? "assets/img/bomba.webp" : "assets/img/toupeira1.png";
+        image.alt = isBomb ? "Bomba" : "Toupeira";
+        updateHud();
+
+        const visibleTime = Math.max(350, 1400 - ((state.level - 1) * 100));
+        state.spawnTimer = window.setTimeout(() => {
+            clearTarget();
+            scheduleTarget();
+        }, visibleTime);
+    }
+
+    function scheduleTarget(delay = 350 + Math.random() * 450) {
+        if (!state.running) return;
+        state.spawnTimer = window.setTimeout(showTarget, delay);
+    }
 }
