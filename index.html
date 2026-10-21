@@ -18,6 +18,16 @@
              class="logo-header">
 
         <h1>ACERTE A TOUPEIRA</h1>
+
+        <nav aria-label="Navegação principal">
+            <ul>
+                <li><a href="index.html" aria-current="page">Entrar</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="jogo.html">Jogo</a></li>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="ranking.html">Ranking</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
@@ -25,8 +35,7 @@
         <section>
             <h2>ENTRAR</h2>
 
-            <form action="jogo.html" method="get">
-
+            <form id="login-form">
                 <label for="username">Username</label>
                 <input
                     type="text"
@@ -46,21 +55,15 @@
                 >
 
                 <button type="submit">
-                    <img
-                        src="assets/img/hammer.png"
-                        alt=""
-                        class="icon-inline"
-                    >
+                    <img src="assets/img/hammer.png" alt="" class="icon-inline">
                     ENTRAR
                 </button>
-
             </form>
 
             <p class="eyebrow">
                 Ainda não possui uma conta?
                 <a href="cadastro.html">Cadastre-se</a>
             </p>
-
         </section>
 
     </main>
@@ -73,12 +76,9 @@
         <p>
             Integrantes do Grupo: André Brito / Davy Pereira / Lucas Lima / Marcos Almeida / Vitor Cunha
         </p>
-
-        <p>
-            Ano/Semestre: 2026/2
-        </p>
     </footer>
 
+    <script src="js/login.js" defer></script>
 </body>
 
 </html>

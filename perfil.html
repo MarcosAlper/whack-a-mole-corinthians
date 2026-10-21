@@ -3,111 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+    <title>Perfil - Acerte a Toupeira</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
     <header>
         <img src="assets/img/toupeira2.png" alt="Toupeira pixel art" class="logo-header">
-
         <h1>MEU PERFIL</h1>
-
-        <nav>
+        <nav aria-label="Navegação principal">
             <ul>
-                <li><a href="jogo.html">Voltar ao Jogo</a></li>
-                <li><a href="ranking.html">High Scores</a></li>
-                <li><a href="index.html">Sair do Jogo</a></li>
+                <li><a href="index.html">Entrar</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="jogo.html">Jogo</a></li>
+                <li><a href="perfil.html" aria-current="page">Perfil</a></li>
+                <li><a href="ranking.html">Ranking</a></li>
             </ul>
         </nav>
     </header>
-
     <main>
-
         <section class="perfil-card">
             <h2>INFORMAÇÕES DO JOGADOR</h2>
-
             <div class="perfil-info">
-                <p><strong>Nome:</strong> Gabriel Costa</p>
-                <p><strong>Username:</strong> DJGAB</p>
-                <p><strong>E-mail:</strong> gabriel@email.com</p>
-                <p><strong>Data de nascimento:</strong> 15/03/2002</p>
-                <p><strong>Telefone:</strong> (19) 99999-9999</p>
-                <p><strong>CPF:</strong> 123.456.789-00</p>
+                <p><strong>Nome:</strong> Visitante</p>
+                <p><strong>Username:</strong> não definido</p>
+                <p><strong>E-mail:</strong> não informado</p>
+                <p><strong>Data de nascimento:</strong> não informada</p>
+                <p><strong>Telefone:</strong> não informado</p>
+                <p><strong>CPF:</strong> não informado</p>
             </div>
         </section>
-
         <section>
-            <h3>ESTATÍSTICAS</h3>
+            <h2>EDITAR INFORMAÇÕES</h2>
+            <form id="profile-form">
+                <label for="profile-name">Nome completo</label>
+                <input type="text" id="profile-name" name="nome" required>
 
-            <div class="perfil-estatisticas">
+                <label for="profile-email">E-mail</label>
+                <input type="email" id="profile-email" name="email" required>
 
-                <div class="estatistica">
-                    <strong>24</strong>
-                    <span>Partidas Jogadas</span>
-                </div>
+                <label for="profile-phone">Telefone</label>
+                <input type="tel" id="profile-phone" name="telefone" required>
 
-                <div class="estatistica">
-                    <strong>360</strong>
-                    <span>Melhor Pontuação</span>
-                </div>
+                <label for="profile-birth">Data de nascimento</label>
+                <input type="text" id="profile-birth" value="Não informada" readonly>
 
-                <div class="estatistica">
-                    <strong>82%</strong>
-                    <span>Precisão Média</span>
-                </div>
+                <label for="profile-cpf">CPF</label>
+                <input type="text" id="profile-cpf" value="Não informado" readonly>
 
-                <div class="estatistica">
-                    <strong>12</strong>
-                    <span>Melhor Nível</span>
-                </div>
+                <label for="profile-username">Username</label>
+                <input type="text" id="profile-username" value="Não definido" readonly>
 
-            </div>
+                <button type="submit">SALVAR ALTERAÇÕES</button>
+            </form>
+            <p id="profile-message" role="status" aria-live="polite"></p>
         </section>
-
         <section>
-            <h3>ÚLTIMAS PARTIDAS</h3>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Modo</th>
-                        <th>Arena</th>
-                        <th>Pontos</th>
-                        <th>Nível</th>
-                        <th>Data</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>Explosivo</td>
-                        <td>16 buracos</td>
-                        <td>360</td>
-                        <td>12</td>
-                        <td>20/09/2026</td>
-                    </tr>
-
-                    <tr>
-                        <td>Clássico</td>
-                        <td>12 buracos</td>
-                        <td>180</td>
-                        <td>6</td>
-                        <td>18/09/2026</td>
-                    </tr>
-
-                    <tr>
-                        <td>Explosivo</td>
-                        <td>20 buracos</td>
-                        <td>150</td>
-                        <td>5</td>
-                        <td>15/09/2026</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h2>ESTATÍSTICAS E PARTIDAS</h2>
         </section>
-
     </main>
-
+    <script src="js/perfil.js" defer></script>
 </body>
 </html>
