@@ -201,8 +201,10 @@ if (board) {
         const rows = Number(rowsInput.value);
         const columns = Number(columnsInput.value);
         const holes = rows * columns;
-        if (!Number.isInteger(rows) || !Number.isInteger(columns) || holes < 4 || holes > 64) {
-            setMessage(message, "Escolha dimensões cujo produto fique entre 4 e 64 buracos.", true);
+        if (!Number.isInteger(rows) || !Number.isInteger(columns)
+            || rows < 2 || rows > 8 || columns < 2 || columns > 8
+            || holes < 4 || holes > 64) {
+            setMessage(message, "Use de 2 a 8 linhas e colunas, com uma arena de 4 a 64 buracos.", true);
             return;
         }
         if (state.running) return;

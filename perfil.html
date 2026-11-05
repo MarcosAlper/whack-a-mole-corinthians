@@ -42,7 +42,7 @@
                 <input type="email" id="profile-email" name="email" required>
 
                 <label for="profile-phone">Telefone</label>
-                <input type="tel" id="profile-phone" name="telefone" required>
+                <input type="tel" id="profile-phone" name="telefone" inputmode="numeric" pattern="[0-9]{10,11}" minlength="10" maxlength="11" title="Digite 10 ou 11 números, incluindo o DDD." required>
 
                 <label for="profile-birth">Data de nascimento</label>
                 <input type="text" id="profile-birth" value="Não informada" readonly>

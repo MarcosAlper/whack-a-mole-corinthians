@@ -25,14 +25,14 @@
             <h2><img src="assets/img/engrenagem.webp" alt="" class="icon-inline"> CONFIGURE SUA PARTIDA</h2>
             <form id="game-config" action="#">
                 <label for="linhas">Linhas</label>
-                <input type="number" id="linhas" min="2" max="8" value="4" required>
+                <input type="number" id="linhas" name="linhas" min="2" max="8" value="4" required>
 
                 <label for="colunas">Colunas</label>
-                <input type="number" id="colunas" min="2" max="8" value="4" required>
-                <p id="board-size-hint">A arena deve ter entre 4 e 64 buracos.</p>
+                <input type="number" id="colunas" name="colunas" min="2" max="8" value="4" required>
+                <p id="board-size-hint">Linhas e colunas devem ficar entre 2 e 8; a arena deve ter de 4 a 64 buracos.</p>
 
                 <label for="modo">Modo de jogo</label>
-                <select id="modo">
+                <select id="modo" name="modo">
                     <option value="classica">Clássico</option>
                     <option value="explosiva">Explosivo</option>
                 </select>
@@ -60,7 +60,7 @@
             <div>NÍVEL: <strong id="level">1</strong> | PONTUAÇÃO: <strong id="score">0</strong></div>
         </div>
 
-        <div id="game-board" class="board-mock" aria-label="Tabuleiro do jogo"></div>
+        <div id="game-board" class="board-mock" role="group" aria-label="Tabuleiro do jogo"></div>
 
         <section id="session-history" class="session-history">
             <h2><img src="assets/img/prancheta.webp" alt="" class="icon-inline"> HISTÓRICO DE PARTIDAS</h2>
