@@ -23,7 +23,7 @@ if (board) {
     const levelOutput = document.querySelector("#level");
     const scoreOutput = document.querySelector("#score");
     const historyBody = document.querySelector("#history-body");
-    const sessionHistory = [];
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
     const state = {
         running: false,
@@ -60,9 +60,9 @@ if (board) {
         }
     }
 
-    function renderHistory() {
+    function renderHistory(games) {
         historyBody.replaceChildren();
-        if (sessionHistory.length === 0) {
+        if (games.length === 0) {
             const row = document.createElement("tr");
             const cell = document.createElement("td");
             cell.className = "history-empty";
@@ -73,16 +73,29 @@ if (board) {
             return;
         }
 
-        sessionHistory.forEach((game) => {
+        games.forEach((game) => {
             const row = document.createElement("tr");
-            ["Visitante", `${game.rows} x ${game.columns} (${game.rows * game.columns} buracos)`, game.mode,
-                game.score, game.level, game.playedAt].forEach((value) => {
+            const mode = game.mode === "classica" ? "Clássica" : "Explosiva";
+            const playedAt = new Date(game.played_at).toLocaleString("pt-BR");
+            [game.player_name, `${game.rows_count} x ${game.columns_count} (${game.rows_count * game.columns_count} buracos)`,
+                mode, game.score, game.level_reached, playedAt].forEach((value) => {
                 const cell = document.createElement("td");
                 cell.textContent = value;
                 row.append(cell);
             });
             historyBody.append(row);
         });
+    }
+
+    async function loadHistory() {
+        const response = await fetch("api/games.php");
+        const data = await response.json();
+        if (response.status === 401) {
+            window.location.href = "index.html";
+            return;
+        }
+        if (!response.ok) throw new Error(data.error || "Não foi possível carregar o histórico.");
+        renderHistory(data.games);
     }
 
     function clearTarget() {
@@ -149,25 +162,44 @@ if (board) {
         state.spawnTimer = window.setTimeout(showTarget, delay);
     }
 
-    function finishGame(reason) {
+    async function finishGame(reason) {
         if (!state.running) return;
         state.running = false;
         clearTimeout(state.spawnTimer);
         clearInterval(state.clockTimer);
         clearTarget();
         quitButton.disabled = true;
-        startButton.disabled = false;
-        sessionHistory.unshift({
+        startButton.disabled = true;
+        const game = {
             rows: state.rows,
             columns: state.columns,
-            mode: state.mode === "classica" ? "Clássica" : "Explosiva",
+            mode: state.mode,
             score: state.score,
             level: state.level,
-            playedAt: new Date().toLocaleString("pt-BR")
-        });
-        renderHistory();
+            totalHits: state.totalHits
+        };
         const endText = reason === "quit" ? "Partida encerrada." : "Fim de jogo: mínimo de acertos não atingido.";
-        setMessage(message, `${endText} Resultado: ${state.totalHits} toupeiras, ${state.score} pontos, nível ${state.level}.`);
+        const resultText = `${endText} Resultado: ${game.totalHits} toupeiras, ${game.score} pontos, nível ${game.level}.`;
+        setMessage(message, `${resultText} Salvando...`);
+        try {
+            const response = await fetch("api/games.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "X-CSRF-Token": csrfToken },
+                body: JSON.stringify(game)
+            });
+            const data = await response.json();
+            if (response.status === 401) {
+                window.location.href = "index.html";
+                return;
+            }
+            if (!response.ok) throw new Error(data.error || "Não foi possível registrar a partida.");
+            await loadHistory();
+            setMessage(message, `${resultText} Partida registrada.`);
+        } catch (error) {
+            setMessage(message, `${resultText} ${error.message}`, true);
+        } finally {
+            startButton.disabled = false;
+        }
     }
 
     function startLevel() {
@@ -227,6 +259,13 @@ if (board) {
     quitButton.addEventListener("click", () => finishGame("quit"));
     
     renderBoard();
-    renderHistory();
+    loadHistory().catch((error) => {
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.colSpan = 6;
+        cell.textContent = error.message;
+        row.append(cell);
+        historyBody.replaceChildren(row);
+    });
     modeOutput.textContent = "Clássico";
 }

@@ -1,0 +1,116 @@
+CONFIGURAÇÃO DO BACK-END
+
+Requisitos
+- PHP 8.1 ou superior com PDO e o driver pdo_mysql.
+- MySQL 8 ou MariaDB 10.4 ou superior.
+- Um servidor web configurado para executar PHP. Para desenvolvimento, pode ser usado
+  o servidor incluído no PHP.
+
+CONFIGURAÇÃO NO WINDOWS
+
+1. Verifique qual PHP o PowerShell está usando:
+   php --ini
+   php -m
+
+2. Se php --ini mostrar "Loaded Configuration File: (none)", crie um php.ini na pasta
+   do projeto usando o arquivo de desenvolvimento incluído na instalação do PHP:
+   $phpDir = Split-Path (Get-Command php).Source
+   Copy-Item "$phpDir\php.ini-development" ".\php.ini"
+
+3. Abra .\php.ini e configure estas opções:
+   - Defina extension_dir como o caminho da pasta ext da instalação do PHP. Para obter
+     esse caminho, execute:
+     $phpDir = Split-Path (Get-Command php).Source
+     Write-Output (Join-Path $phpDir "ext")
+   - Ative a linha extension=pdo_mysql removendo o ponto e vírgula inicial.
+
+4. Confirme que o driver foi carregado:
+   php -c .\php.ini --ini
+   php -c .\php.ini -m
+   A saída deve listar PDO e pdo_mysql. Se não listar pdo_mysql, confira o caminho
+   extension_dir e se php_pdo_mysql.dll existe nessa pasta ext.
+
+CONFIGURAÇÃO DO MYSQL/MARIADB
+
+1. Inicie o serviço MariaDB/MySQL. No Windows, é possível conferir em Serviços
+   (services.msc). O exemplo local usa host 127.0.0.1 e porta 3306.
+
+2. Conecte ao servidor com HeidiSQL ou outro cliente administrativo e execute todo o
+   conteúdo de database.sql. O script cria o banco acerte_a_toupeira e as tabelas users
+   e games.
+
+3. Crie uma conta dedicada para o site, substituindo o exemplo da senha por uma senha
+   forte escolhida por você:
+   CREATE USER 'acerte_app'@'127.0.0.1' IDENTIFIED BY 'SUA_SENHA_FORTE';
+   GRANT SELECT, INSERT ON acerte_a_toupeira.users TO 'acerte_app'@'127.0.0.1';
+   GRANT UPDATE (full_name, email, phone) ON acerte_a_toupeira.users TO 'acerte_app'@'127.0.0.1';
+   GRANT SELECT, INSERT ON acerte_a_toupeira.games TO 'acerte_app'@'127.0.0.1';
+
+   Execute esses comandos no cliente do banco depois de selecionar qualquer banco.
+   Se a conta já existir e você quiser trocar sua senha, use:
+   ALTER USER 'acerte_app'@'127.0.0.1' IDENTIFIED BY 'SUA_NOVA_SENHA';
+   Em seguida, reaplique os três comandos GRANT acima.
+
+   Nunca use os textos de exemplo como senhas reais. Não compartilhe sua senha nem
+   coloque-a no repositório.
+
+INICIAR O SITE LOCALMENTE
+
+1. Na pasta raiz do projeto, abra .env e configure os dados da conta MariaDB criada
+   acima. O conteúdo local deve seguir este formato:
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_NAME=acerte_a_toupeira
+   DB_USER=acerte_app
+   DB_PASSWORD=sua_senha_do_mariadb
+
+   Substitua somente o valor de DB_PASSWORD pela senha definida para acerte_app.
+   Não inclua aspas nos valores simples. O arquivo .env.example é um modelo; o PHP
+   carrega o arquivo .env da raiz do projeto automaticamente.
+
+   O arquivo .env contém um segredo e é ignorado pelo Git. Não o compartilhe nem o
+   envie ao repositório. Variáveis de ambiente já definidas no Windows têm precedência
+   sobre os valores do arquivo; se necessário, remova overrides na sessão do PowerShell
+   antes de iniciar o servidor:
+   Remove-Item Env:DB_HOST, Env:DB_PORT, Env:DB_NAME, Env:DB_USER, Env:DB_PASSWORD -ErrorAction SilentlyContinue
+
+   Para conferir que o arquivo foi lido sem imprimir a senha:
+   php -c .\php.ini -r "require 'api/bootstrap.php'; echo getenv('DB_HOST') . ' / ' . getenv('DB_NAME') . ' / ' . getenv('DB_USER');"
+
+2. Inicie o servidor PHP com o php.ini do projeto:
+   php -c .\php.ini -S 127.0.0.1:8000
+
+3. Mantenha essa janela aberta e acesse:
+   http://127.0.0.1:8000/index.html
+   Não abra as páginas diretamente com file://. Se alterar .env, reinicie o servidor
+   com Ctrl+C e inicie-o novamente para carregar os novos valores.
+
+TESTE DE FUNCIONAMENTO
+
+- Cadastre um jogador em cadastro.html e entre com o username e senha desse jogador.
+  acerte_app é a conta de conexão ao banco, não uma conta de jogador.
+- Jogue uma partida e aguarde o fim ou desista. A partida deve aparecer no histórico
+  e continuar lá depois de atualizar a página.
+- Confira o perfil, altere os campos permitidos e confirme que as alterações persistem.
+- O ranking global mostra os 10 melhores resultados individuais de cada modalidade.
+- Depois de sair, tente abrir jogo.php, perfil.php ou ranking.php: sem autenticação,
+  o acesso deve redirecionar à tela de login.
+
+Se o navegador mostrar erro de banco de dados, consulte também a janela do PowerShell
+onde o servidor PHP está rodando. Verifique se o MariaDB está ativo, se pdo_mysql foi
+carregado, se o banco/tabelas existem e se DB_USER, DB_PASSWORD, host e porta estão
+corretos.
+
+FUNCIONALIDADES E SEGURANÇA
+
+- jogo.php, perfil.php e ranking.php exigem sessão autenticada.
+- O cadastro usa api/auth/register.php; o login usa api/auth/login.php; a saída usa
+  POST em api/auth/logout.php.
+- O perfil permite alterar nome, e-mail e telefone; username, CPF e nascimento não
+  são editáveis.
+- As partidas são gravadas ao final normal ou quando o jogador desiste.
+- O ranking exibe o melhor resultado de cada jogador em cada modalidade e mostra os
+  10 primeiros, ordenados por pontuação, nível, acertos e data.
+- Senhas de jogadores são armazenadas com password_hash. As operações de banco usam
+  PDO e consultas preparadas. As requisições que alteram dados usam token CSRF.
+- Em produção, use HTTPS, uma conta de banco dedicada e variáveis de ambiente seguras.
